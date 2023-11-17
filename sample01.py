@@ -2,13 +2,18 @@ import ticket
 from reportlab.lib.units import mm
 from reportlab.lib.pagesizes import A4, LETTER
 from reportlab.pdfgen import canvas
-from reportlab.lib.colors import red
+from reportlab.lib.colors import red,black
 
-t = ticket.Ticket(190*mm, 62*mm)
-t.add_drawable(ticket.Image("sample01.png"))
+t = ticket.Ticket(190*mm, 65*mm)
+t.add_drawable(ticket.Image("Ticket_FDAT_2023.png"))
 #t.add_drawable(ticket.Border(color=red))
-t.add_drawable(ticket.Box(17*mm, 12*mm, 30*mm, 10*mm, bordercolor=red, borderwidth=1*mm))
-t.add_drawable(ticket.Counter(20*mm, 15*mm, fontname='Courier-Bold', fontsize=20))
+
+#counter
+pos_x=123*mm
+pos_y=5*mm
+
+t.add_drawable(ticket.Box(pos_x, pos_y, 19*mm, 7*mm, bordercolor=black, borderwidth=0.25*mm))
+t.add_drawable(ticket.Counter(pos_x + 3*mm, pos_y +2.2*mm, fontname='Courier-Bold', fontsize=12))
 
 # Note: Available width = page width - 2* cropmark size - margin left - margin right (donc 210 - 5*2 , si 0 left et 0 right
 #LETTER size = 8.5 x 11 = 215.9mm   x 279.4
