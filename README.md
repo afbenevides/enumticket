@@ -23,7 +23,7 @@ git clone "adress of private repo" data
 cp sample_config.py data/config.py
 ```
 
-or sinply create you forlder and files locally
+or simply create you folder and files locally
 
 ```bash
 mkdir data
@@ -32,6 +32,6 @@ cp sample_config.py data/config.py
 change values in data/config.py according to your needs.
 
 ## Todo 
-- Add explanation in config.py file on what parameter does what and what are the acceptable values for each
-- make different demo (raffle ticket with double number, concert ticket one number)
-- put some image demo of done tickets
+- Add explanations in config.py file on what parameter does what and what are the acceptable values for each
+- Make different demo (raffle ticket with double number, concert ticket one number)
+- Add some image demo of done tickets
