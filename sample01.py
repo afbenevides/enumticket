@@ -34,6 +34,7 @@ if os.path.exists(Data_file_path):
     FIRST_COUNTER_FONTNAME = config.FIRST_COUNTER_FONTNAME
     FIRST_COUNTER_FONTSIZE = config.FIRST_COUNTER_FONTSIZE
 
+    SECOND_COUNTER_ACTIVATE = config.SECOND_COUNTER_ACTIVATE
     SECOND_COUNTER_X_POS_OFFSET_MM = config.SECOND_COUNTER_X_POS_OFFSET_MM
     SECOND_COUNTER_Y_POS_OFFSET_MM = config.SECOND_COUNTER_Y_POS_OFFSET_MM
 
@@ -77,6 +78,7 @@ else:
     FIRST_COUNTER_FONTNAME = "Courier-Bold"
     FIRST_COUNTER_FONTSIZE = 20
 
+    SECOND_COUNTER_ACTIVATE = False
     SECOND_COUNTER_X_POS_OFFSET_MM = 45
     SECOND_COUNTER_Y_POS_OFFSET_MM = 0
 
@@ -91,9 +93,10 @@ else:
     PAGE_LAYOUT_TICKETS_MARGIN_TOP_MM = 0
     PAGE_LAYOUT_TICKETS_MARGIN_RIGHT_MM = 0
 
-    LAYOUT_GENERATION_ORDER = ticket.STACKORDER
+    LAYOUT_GENERATION_ORDER = ticket.SEQUENTIALORDER
     LAYOUT_GENERATION_CROPMARKS = True
     LAYOUT_GENERATION_INVERT = True
+    LAYOUT_BUNDLE_ACTIVATE = False
 
 t = ticket.Ticket(TICKETS_WIDTH_MM * mm, TICKETS_HEIGHT_MM * mm)
 t.add_drawable(ticket.Image(TICKETS_IMAGE_PATH))
@@ -107,7 +110,7 @@ t.add_drawable(ticket.Box(pos_x, pos_y, FIRST_COUNTER_BOX_WIDTH_MM * mm, FIRST_C
 t.add_drawable(ticket.Counter(pos_x + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE))
 
 # Deactivate/activate second counter for raffle ticket double numerotation with False/True
-if True:
+if SECOND_COUNTER_ACTIVATE:
     t.add_drawable(ticket.Box(pos_x + SECOND_COUNTER_X_POS_OFFSET_MM * mm, pos_y + SECOND_COUNTER_Y_POS_OFFSET_MM * mm, FIRST_COUNTER_BOX_WIDTH_MM * mm, FIRST_COUNTER_BOX_LENGTH_MM * mm, bordercolor=FIRST_COUNTER_BOX_BORDER_COLOR, borderwidth=FIRST_COUNTER_BOX_BORDERWIDTH * mm))
     t.add_drawable(ticket.Counter(pos_x + SECOND_COUNTER_X_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + SECOND_COUNTER_Y_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE))
 
@@ -134,7 +137,7 @@ c.save()
 
 # Creation of stapled bundles ready for prints
 # deactivate/activate bundle creation with False/True
-if True:
+if LAYOUT_BUNDLE_ACTIVATE:
     nb_ticket_per_stapled_bundle = NB_TICKETS_PER_BUNDLE
     nb_tickets_per_page = layout.colcount * layout.rowcount
     nb_tickets_per_layout = (nb_tickets_per_page * nb_ticket_per_stapled_bundle)
