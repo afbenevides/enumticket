@@ -5,7 +5,6 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.colors import red
 import os
 
-#choix si demo ou data privé
 
 # Replace this with your file path
 Data_file_path = 'data/config.py'
