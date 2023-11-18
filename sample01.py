@@ -11,9 +11,6 @@ Data_file_path = 'data/config.py'
 
 # Check if the file exists
 if os.path.exists(Data_file_path):
-    # Code to execute if the file exists
-    print(f"File '{Data_file_path}' exists.")
-
     from data import config
 
     TICKETS_WIDTH_MM = config.TICKETS_WIDTH_MM
@@ -55,11 +52,7 @@ if os.path.exists(Data_file_path):
 
 
 
-    # Add more code here as needed
 else:
-    # Code to execute if the file does not exist
-    print(f"File '{Data_file_path}' does not exist.")
-    # Add more code here as needed
     TICKETS_WIDTH_MM = 84
     TICKETS_HEIGHT_MM = 62
 
