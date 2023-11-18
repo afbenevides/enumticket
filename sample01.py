@@ -125,6 +125,10 @@ layout = ticket.PageLayout(t, NB_TICKETS_TOTAL, numoffset=PAGE_LAYOUT_TICKETS_NU
 c = canvas.Canvas('data/Layout_0_complete_file.pdf', layout.pagesize)
 # print(c.getAvailableFonts())
 
+#Validate if now data folder exists, if not create it
+if not os.path.exists('data/'):
+    os.makedirs('data/')
+
 layout.generate(c, order=LAYOUT_GENERATION_ORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT)
 c.save()
 
