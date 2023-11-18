@@ -8,7 +8,30 @@ A templating layer was added to the base code via config.py files listing all pa
 
 Note that even the numbering order based on the assembly automation needed is parametrable. Thus stackorder is possible instead of sequential order.
 
-#Todo 
-Add explanation in config.py file on what parameter does what and what are the acceptable values for each
-make different demo (raffle ticket with double number, concert ticket one number)
-put some image demo of done tickets
+## Installation
+
+```bash
+make install
+```
+
+## Create your private data project
+
+i use another private repo to host the private data associated to a ticket version made. So you can do same by cloning your private repo.
+
+```bash
+git clone "adress of private repo" data
+cp sample_config.py data/config.py
+```
+
+or sinply create you forlder and files locally
+
+```bash
+mkdir data
+cp sample_config.py data/config.py
+```
+change values in data/config.py according to your needs.
+
+## Todo 
+- Add explanation in config.py file on what parameter does what and what are the acceptable values for each
+- make different demo (raffle ticket with double number, concert ticket one number)
+- put some image demo of done tickets
