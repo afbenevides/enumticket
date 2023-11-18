@@ -143,5 +143,5 @@ if LAYOUT_BUNDLE_ACTIVATE:
 
         c = canvas.Canvas('data/Layout_'+str(n)+'.pdf', layout.pagesize)
         # print(c.getAvailableFonts())
-        layout.generate(c, order=LAYOUT_GENERATION_ORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT)
+        layout.generate(c, order=ticket.STACKORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT)
         c.save()
