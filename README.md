@@ -42,9 +42,11 @@ Tickets in preparation, please wait ...
 Done! Thanks!
 ```
 
+## Results
 
+This should output a PDF (or multiple PDF with the bundle option to True) in data folder
 
-This should output a PDF (or multiple PDF with the bundle option to True) in data folder.
+ex:  data/Layout_0_complete_file.pdf
 
 
 ## Todo 
