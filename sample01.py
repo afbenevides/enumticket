@@ -1,8 +1,8 @@
 import ticket
 from reportlab.lib.units import mm
-from reportlab.lib.pagesizes import A3
+from reportlab.lib.pagesizes import A3, LETTER
 from reportlab.pdfgen import canvas
-from reportlab.lib.colors import red
+from reportlab.lib.colors import red, white, black
 import os
 
 
@@ -38,6 +38,8 @@ if os.path.exists(Data_file_path):
     NB_TICKETS_TOTAL = config.NB_TICKETS_TOTAL
     NB_TICKETS_PER_BUNDLE = config.NB_TICKETS_PER_BUNDLE
 
+    PAGE_LAYOUT_BACKGROUND_COLOR = config.PAGE_LAYOUT_BACKGROUND_COLOR
+    PAGE_LAYOUT_CROPMARKS_COLOR = config.PAGE_LAYOUT_CROPMARKS_COLOR
     PAGE_LAYOUT_TICKETS_NUMOFFSET = config.PAGE_LAYOUT_TICKETS_NUMOFFSET
     PAGE_LAYOUT_TICKETS_PAGESIZE = config.PAGE_LAYOUT_TICKETS_PAGESIZE
     PAGE_LAYOUT_TICKETS_BLEED_MM = config.PAGE_LAYOUT_TICKETS_BLEED_MM
@@ -79,6 +81,8 @@ else:
     NB_TICKETS_TOTAL = 100
     NB_TICKETS_PER_BUNDLE = 5
 
+    PAGE_LAYOUT_BACKGROUND_COLOR = white
+    PAGE_LAYOUT_CROPMARKS_COLOR = black
     PAGE_LAYOUT_TICKETS_NUMOFFSET = 100
     PAGE_LAYOUT_TICKETS_PAGESIZE = A3
     PAGE_LAYOUT_TICKETS_BLEED_MM = 2
@@ -120,13 +124,15 @@ layout = ticket.PageLayout(t, NB_TICKETS_TOTAL, numoffset=PAGE_LAYOUT_TICKETS_NU
                            top=PAGE_LAYOUT_TICKETS_MARGIN_TOP_MM * mm, right=PAGE_LAYOUT_TICKETS_MARGIN_RIGHT_MM * mm)
 
 c = canvas.Canvas('data/Layout_0_complete_file.pdf', layout.pagesize)
+c.setFillColor(PAGE_LAYOUT_BACKGROUND_COLOR)  # Set the color (in RGB format), e.g., white
+c.rect(0, 0, PAGE_LAYOUT_TICKETS_PAGESIZE[0], PAGE_LAYOUT_TICKETS_PAGESIZE[1], fill=1, stroke=0)
 # print(c.getAvailableFonts())
 
 #Validate if now data folder exists, if not create it
 if not os.path.exists('data/'):
     os.makedirs('data/')
 
-layout.generate(c, order=LAYOUT_GENERATION_ORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT)
+layout.generate(c, order=LAYOUT_GENERATION_ORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT, background_color=PAGE_LAYOUT_BACKGROUND_COLOR, cropmarks_color=PAGE_LAYOUT_CROPMARKS_COLOR)
 c.save()
 
 # Creation of stapled bundles ready for prints
@@ -142,6 +148,9 @@ if LAYOUT_BUNDLE_ACTIVATE:
                                    left=PAGE_LAYOUT_TICKETS_MARGIN_LEFT_MM * mm, top=PAGE_LAYOUT_TICKETS_MARGIN_TOP_MM * mm, right=PAGE_LAYOUT_TICKETS_MARGIN_RIGHT_MM * mm)
 
         c = canvas.Canvas('data/Layout_'+str(n)+'.pdf', layout.pagesize)
+        c.setFillColor(PAGE_LAYOUT_BACKGROUND_COLOR)  # Set the color (in RGB format), e.g., white
+        c.rect(0, 0, PAGE_LAYOUT_TICKETS_PAGESIZE[0], PAGE_LAYOUT_TICKETS_PAGESIZE[1], fill=1, stroke=0)
+
         # print(c.getAvailableFonts())
-        layout.generate(c, order=ticket.STACKORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT)
+        layout.generate(c, order=LAYOUT_GENERATION_ORDER, cropmarks=LAYOUT_GENERATION_CROPMARKS, invert=LAYOUT_GENERATION_INVERT, background_color=PAGE_LAYOUT_BACKGROUND_COLOR, cropmarks_color=PAGE_LAYOUT_CROPMARKS_COLOR)
         c.save()

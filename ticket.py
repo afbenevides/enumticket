@@ -246,10 +246,11 @@ class PageLayout(object):
                     
         canvas.restoreState()
         
-    def paint_cropmarks(self, canvas):
+    def paint_cropmarks(self, canvas, cropmarks_color=black):
         canvas.saveState()
         canvas.setLineWidth(self.cropmarks[1])
-        canvas.setStrokeColor(black)
+        #SET Stroke_color
+        canvas.setStrokeColor(cropmarks_color)
         for col in range(0, self.colcount):
             canvas.line(self.realmargins.left+col*self.ticket.width+self.bleed, self.realmargins.bottom,
                         self.realmargins.left+col*self.ticket.width+self.bleed, self.realmargins.bottom-self.cropmarks[0])
@@ -313,7 +314,7 @@ class PageLayout(object):
             self.numbers.reverse()
                 
         
-    def generate(self, canvas, order=STACKORDER, cropmarks=True, invert=False):
+    def generate(self, canvas, order=STACKORDER, cropmarks=True, invert=False, background_color=white, cropmarks_color=black):
         """
         Layout tickets on canvas.
         
@@ -340,12 +341,13 @@ class PageLayout(object):
             Useful in case the printer output is piled up in reverse
             order.
         """
+
         self.generate_numbers(order=order, invert=invert)
         for numbers in self.numbers:
             col = 0
             row = 0
             if cropmarks is True:
-                self.paint_cropmarks(canvas)
+                self.paint_cropmarks(canvas,cropmarks_color)
             for number in numbers:
                 self.ticket.set_number(number)
                 x,y = self.get_cell(col, row)
@@ -356,7 +358,11 @@ class PageLayout(object):
                 else:
                     col = 0
                     row +=1
+
             canvas.showPage()
+            canvas.setFillColor(background_color)  # Set the color (in RGB format), e.g., white
+            canvas.rect(0, 0, self.pagesize[0], self.pagesize[1], fill=1, stroke=0)
+
                     
                     
         
