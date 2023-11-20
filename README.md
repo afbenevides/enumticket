@@ -31,6 +31,22 @@ cp sample_config.py data/config.py
 ```
 change values in data/config.py according to your needs.
 
+## Run the script
+In order to add numbers and make your ticket printing files:
+
+```bash
+make run
+```
+```
+Tickets in preparation, please wait ...
+Done! Thanks!
+```
+
+
+
+This should output a PDF (or multiple PDF with the bundle option to True) in data folder.
+
+
 ## Todo 
 - Add explanations in config.py file on what parameter does what and what are the acceptable values for each
 - Make different demo (raffle ticket with double number, concert ticket one number)
