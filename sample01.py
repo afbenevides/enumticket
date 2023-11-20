@@ -30,6 +30,7 @@ if os.path.exists(Data_file_path):
     FIRST_COUNTER_POS_OFFSET_Y = config.FIRST_COUNTER_POS_OFFSET_Y
     FIRST_COUNTER_FONTNAME = config.FIRST_COUNTER_FONTNAME
     FIRST_COUNTER_FONTSIZE = config.FIRST_COUNTER_FONTSIZE
+    FIRST_COUNTER_FONT_COLOR = config.FIRST_COUNTER_FONT_COLOR
 
     SECOND_COUNTER_ACTIVATE = config.SECOND_COUNTER_ACTIVATE
     SECOND_COUNTER_X_POS_OFFSET_MM = config.SECOND_COUNTER_X_POS_OFFSET_MM
@@ -73,6 +74,8 @@ else:
     FIRST_COUNTER_POS_OFFSET_Y = 3
     FIRST_COUNTER_FONTNAME = "Courier-Bold"
     FIRST_COUNTER_FONTSIZE = 20
+    FIRST_COUNTER_FONT_COLOR = black
+
 
     SECOND_COUNTER_ACTIVATE = False
     SECOND_COUNTER_X_POS_OFFSET_MM = 45
@@ -105,12 +108,12 @@ pos_x = FIRST_COUNTER_X_POS_MM * mm
 pos_y = FIRST_COUNTER_Y_POS_MM * mm
 
 t.add_drawable(ticket.Box(pos_x, pos_y, FIRST_COUNTER_BOX_WIDTH_MM * mm, FIRST_COUNTER_BOX_LENGTH_MM * mm, bordercolor=FIRST_COUNTER_BOX_BORDER_COLOR, borderwidth=FIRST_COUNTER_BOX_BORDERWIDTH * mm))
-t.add_drawable(ticket.Counter(pos_x + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE))
+t.add_drawable(ticket.Counter(pos_x + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE, color=FIRST_COUNTER_FONT_COLOR))
 
 # Deactivate/activate second counter for raffle ticket double numerotation with False/True
 if SECOND_COUNTER_ACTIVATE:
     t.add_drawable(ticket.Box(pos_x + SECOND_COUNTER_X_POS_OFFSET_MM * mm, pos_y + SECOND_COUNTER_Y_POS_OFFSET_MM * mm, FIRST_COUNTER_BOX_WIDTH_MM * mm, FIRST_COUNTER_BOX_LENGTH_MM * mm, bordercolor=FIRST_COUNTER_BOX_BORDER_COLOR, borderwidth=FIRST_COUNTER_BOX_BORDERWIDTH * mm))
-    t.add_drawable(ticket.Counter(pos_x + SECOND_COUNTER_X_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + SECOND_COUNTER_Y_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE))
+    t.add_drawable(ticket.Counter(pos_x + SECOND_COUNTER_X_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_X * mm, pos_y + SECOND_COUNTER_Y_POS_OFFSET_MM * mm + FIRST_COUNTER_POS_OFFSET_Y * mm, fontname=FIRST_COUNTER_FONTNAME, fontsize=FIRST_COUNTER_FONTSIZE, color=FIRST_COUNTER_FONT_COLOR))
 
 # Note: Available width = page width - 2* cropmark size - margin left - margin right (donc 210 - 5*2 , si 0 left et 0 right
 # LETTER size = 8.5 x 11 = 215.9mm   x 279.4
