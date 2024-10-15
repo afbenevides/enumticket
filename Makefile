@@ -6,7 +6,7 @@ install:
 	@echo "Activation de l'environnement virtuel..."
 	@. venv/bin/activate
 	@echo "Installation des dépendances Python..."
-	@pip install -r requirements.txt
+	@venv/bin/pip3 install -r requirements.txt
 	@echo "Installation terminée."
 
 
